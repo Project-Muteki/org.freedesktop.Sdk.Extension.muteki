@@ -188,21 +188,16 @@ modules:
     config-opts:
       - '--cross-file=../meson-cross/arm-none-bestaeabi.ini'
 
-  #- name: 'besta-tools'
-  #  buildsystem: 'simple'
-  #  sources:
-  #    - type: 'git'
-  #      url: 'https://github.com/Project-Muteki/besta-tools.git'
-  #      commit: '0c12ceb2c5c071d85f2f6f84e47a0a0efea8287b'
-  #  build-commands:
-  #    - 'pip3 install --prefix=/usr/lib/sdk/muteki .'
+  - 'python3-besta-tools.json'
 
   - name: 'scripts'
     buildsystem: simple
     sources:
       - type: 'script'
         commands:
-          - 'export PATH=$PATH:/usr/lib/sdk/muteki/bin'
+          - 'export PATH="${PATH}":/usr/lib/sdk/muteki/bin'
+          # TODO need a less janky way of handling this. Though I'd be glad if this would be handled in Freedesktop SDK instead...
+          - 'export PYTHONPATH=/usr/lib/sdk/muteki/lib/python3.12/site-packages:"${PYTHONPATH}"'
         dest-filename: 'enable.sh'
     build-commands:
       - 'cp *.sh ${FLATPAK_DEST}'

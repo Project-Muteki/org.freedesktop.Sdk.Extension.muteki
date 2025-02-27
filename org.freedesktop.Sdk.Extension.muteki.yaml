@@ -1,0 +1,217 @@
+id: 'org.freedesktop.Sdk.Extension.muteki'
+branch: '24.08'
+runtime: 'org.freedesktop.Sdk'
+runtime-version: '24.08'
+build-extension: true
+sdk: 'org.freedesktop.Sdk'
+sdk-extensions: []
+separate-locales: false
+cleanup:
+  - '/_bootstrap'
+  - '/share/info'
+  - '/share/man'
+
+modules:
+  - name: 'binutils-bootstrap'
+    buildsystem: 'autotools'
+    no-autogen: true
+    builddir: true
+    sources:
+      - type: 'git'
+        url: 'https://github.com/Project-Muteki/binutils-gdb.git'
+        commit: '29b6eafbcf6db6e9d2c0ed584fc5e423f8b6a8a5'
+    config-opts:
+      - '--prefix=/usr/lib/sdk/muteki/_bootstrap'
+      - '--target=arm-none-bestaeabi'
+      - '--disable-gdb'
+      - '--disable-unit-tests'
+      - '--disable-nls'
+
+  - name: 'gcc-bootstrap'
+    buildsystem: 'autotools'
+    no-autogen: true
+    builddir: true
+    sources:
+      - type: 'git'
+        url: 'https://github.com/Project-Muteki/gcc.git'
+        commit: 'e0c9ac5fd39b911328a43d1faf44211266f7308e'
+      - type: 'archive'
+        url: 'https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz'
+        sha256: 'ab642492f5cf882b74aa0cb730cd410a81edcdbec895183ce930e706c1c759b8'
+        dest: 'mpc'
+    config-opts:
+      - '--prefix=/usr/lib/sdk/muteki/_bootstrap'
+      - '--with-sysroot=/usr/lib/sdk/muteki/_bootstrap/arm-none-bestaeabi'
+      - '--target=arm-none-bestaeabi'
+      - '--with-system-zlib'
+      - '--with-gcc'
+      - '--with-gnu-ld'
+      - '--with-gnu-as'
+      - '--disable-threads'
+      - '--enable-tls'
+      - '--disable-nls'
+      - '--enable-languages=c,lto'
+      - '--disable-multilib'
+      - '--disable-shared'
+      - '--without-headers'
+      - '--with-newlib'
+      - '--disable-libssp'
+      - '--with-cpu=arm7tdmi'
+      - '--with-float=soft'
+
+  - name: 'target-muteki-shims'
+    buildsystem: 'meson'
+    sources:
+      - type: git
+        url: 'https://github.com/Project-Muteki/muteki-shims.git'
+        commit: '26a294c5f784c68a89b39df2e431be8ba2256f5d'
+    build-options:
+      cflags-override: true
+      cppflags-override: true
+      cxxflags-override: true
+      ldflags-override: true
+      cflags: ''
+      cppflags: ''
+      cxxflags: ''
+      ldflags: ''
+      prefix: '/usr/lib/sdk/muteki/arm-none-bestaeabi'
+      prepend-path: '/usr/lib/sdk/muteki/_bootstrap/bin'
+    config-opts:
+      - '--cross-file=../meson-cross/arm-none-bestaeabi.ini'
+
+  - name: 'target-newlib'
+    buildsystem: 'autotools'
+    no-autogen: true
+    builddir: true
+    sources:
+      - type: 'git'
+        url: 'https://github.com/Project-Muteki/newlib.git'
+        commit: '9f8398717149ffebfe14c34676a9d9fa9f469426'
+    build-options:
+      cflags-override: true
+      cppflags-override: true
+      cxxflags-override: true
+      ldflags-override: true
+      cflags: ''
+      cppflags: ''
+      cxxflags: ''
+      ldflags: ''
+      prepend-path: '/usr/lib/sdk/muteki/_bootstrap/bin'
+      env:
+        CFLAGS_FOR_TARGET: '-I/usr/lib/sdk/muteki/arm-none-bestaeabi/include'
+        CPPFLAGS_FOR_TARGET: '-I/usr/lib/sdk/muteki/arm-none-bestaeabi/include'
+        LDFLAGS_FOR_TARGET: '-L/usr/lib/sdk/muteki/arm-none-bestaeabi/lib'
+    config-opts:
+      - '--prefix=/usr/lib/sdk/muteki'
+      - '--build=x86_64-pc-linux-gnu' # TODO add arm64 support
+      - '--host=x86_64-pc-linux-gnu'
+      - '--target=arm-none-bestaeabi'
+      - '--disable-newlib-supplied-syscalls'
+      - '--disable-nls'
+      - '--disable-libgloss'
+      - '--enable-newlib-mb'
+      - '--enable-newlib-iconv'
+      - '--enable-newlib-register-fini'
+      - '--enable-newlib-reent-thread-local'
+    make-args:
+      - 'all-target-newlib'
+    install-rule: 'install-target-newlib'
+
+  - name: 'binutils'
+    buildsystem: 'autotools'
+    no-autogen: true
+    builddir: true
+    sources:
+      - type: 'git'
+        url: 'https://github.com/Project-Muteki/binutils-gdb.git'
+        commit: '29b6eafbcf6db6e9d2c0ed584fc5e423f8b6a8a5'
+    config-opts:
+      - '--prefix=/usr/lib/sdk/muteki'
+      - '--target=arm-none-bestaeabi'
+      - '--disable-gdb'
+      - '--disable-unit-tests'
+      - '--disable-nls'
+
+  - name: 'gcc'
+    buildsystem: 'autotools'
+    no-autogen: true
+    builddir: true
+    sources:
+      - type: 'git'
+        url: 'https://github.com/Project-Muteki/gcc.git'
+        commit: 'e0c9ac5fd39b911328a43d1faf44211266f7308e'
+      - type: 'archive'
+        url: 'https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz'
+        sha256: 'ab642492f5cf882b74aa0cb730cd410a81edcdbec895183ce930e706c1c759b8'
+        dest: 'mpc'
+    config-opts:
+      - '--prefix=/usr/lib/sdk/muteki'
+      - '--with-sysroot=/usr/lib/sdk/muteki/arm-none-bestaeabi'
+      - '--target=arm-none-bestaeabi'
+      - '--with-system-zlib'
+      - '--with-gcc'
+      - '--with-gnu-ld'
+      - '--with-gnu-as'
+      - '--disable-threads'
+      - '--enable-tls'
+      - '--disable-nls'
+      - '--enable-languages=c,c++,lto'
+      - '--disable-multilib'
+      - '--disable-shared'
+      - '--with-headers'
+      - '--with-newlib'
+      - '--disable-libssp'
+      - '--with-cpu=arm7tdmi'
+      - '--with-float=soft'
+
+  - name: 'target-mutekix'
+    buildsystem: 'meson'
+    sources:
+      - type: git
+        url: 'https://github.com/Project-Muteki/mutekix.git'
+        commit: 'dba6d592c9d12ecc2e5387f95412ef4437542f37'
+      - type: git
+        url: 'https://github.com/Project-Muteki/meson-cross.git'
+        commit: 'c3cdaa1a70ab0c3e75a7ee1a13d3578a46b032a8'
+        dest: 'meson-cross'
+    build-options:
+      cflags-override: true
+      cppflags-override: true
+      cxxflags-override: true
+      ldflags-override: true
+      cflags: ''
+      cppflags: ''
+      cxxflags: ''
+      ldflags: ''
+      prefix: '/usr/lib/sdk/muteki/arm-none-bestaeabi'
+      prepend-path: '/usr/lib/sdk/muteki/bin'
+    config-opts:
+      - '--cross-file=../meson-cross/arm-none-bestaeabi.ini'
+
+  #- name: 'besta-tools'
+  #  buildsystem: 'simple'
+  #  sources:
+  #    - type: 'git'
+  #      url: 'https://github.com/Project-Muteki/besta-tools.git'
+  #      commit: '0c12ceb2c5c071d85f2f6f84e47a0a0efea8287b'
+  #  build-commands:
+  #    - 'pip3 install --prefix=/usr/lib/sdk/muteki .'
+
+  - name: 'scripts'
+    buildsystem: simple
+    sources:
+      - type: 'script'
+        commands:
+          - 'export PATH=$PATH:/usr/lib/sdk/muteki/bin'
+        dest-filename: 'enable.sh'
+    build-commands:
+      - 'cp *.sh ${FLATPAK_DEST}'
+
+  - name: appdata
+    buildsystem: simple
+    sources:
+      - type: file
+        path: org.freedesktop.Sdk.Extension.muteki.appdata.xml
+    build-commands:
+      - 'mkdir -p ${FLATPAK_DEST}/share/metainfo'
+      - 'cp org.freedesktop.Sdk.Extension.muteki.appdata.xml ${FLATPAK_DEST}/share/metainfo'

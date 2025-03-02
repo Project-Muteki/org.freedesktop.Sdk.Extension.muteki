@@ -15,7 +15,7 @@
   <releases>
     <release version="2025030201" date="2025-03-02">
       <description>
-        <p>Turn on optimization for muteki-shims and mutekix, and add a build pass of muteki-shims exclusive for building libc.</p>
+        <p>Turn on optimization for muteki-shims and mutekix, and build another copy of muteki-shims that is used exclusively for building newlib.</p>
       </description>
     </release>
     <release version="2025022801" date="2025-02-28">

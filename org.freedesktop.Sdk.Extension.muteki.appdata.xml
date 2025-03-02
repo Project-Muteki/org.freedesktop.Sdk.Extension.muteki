@@ -13,12 +13,17 @@
   <url type="homepage">https://github.com/Project-Muteki</url>
   <project_license>GPL-2.0 AND GPL-2.0-with-GCC-exception AND MIT</project_license>
   <releases>
-    <release version="20250228-1" date="2025-02-28">
+    <release version="2025030201" date="2025-03-02">
+      <description>
+        <p>Turn on optimization for muteki-shims and mutekix, and add a build pass of muteki-shims exclusive for building libc.</p>
+      </description>
+    </release>
+    <release version="2025022801" date="2025-02-28">
       <description>
         <p>Package besta-tools so IDEs can output final applet executables without the help from a more complete SDK installation outside Flatpak.</p>
       </description>
     </release>
-    <release version="20250227-1" date="2025-02-27">
+    <release version="2025022701" date="2025-02-27">
       <description>
         <p>Initial release.</p>
       </description>

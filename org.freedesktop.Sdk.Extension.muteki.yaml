@@ -59,12 +59,13 @@ modules:
       - '--with-cpu=arm7tdmi'
       - '--with-float=soft'
 
-  - name: 'target-muteki-shims'
+  # NOTE: Only update this after a libc update, or the toolchain will be rebuilt.
+  - name: 'target-muteki-shims-bootstrap'
     buildsystem: 'meson'
     sources:
       - type: git
         url: 'https://github.com/Project-Muteki/muteki-shims.git'
-        commit: '26a294c5f784c68a89b39df2e431be8ba2256f5d'
+        commit: '01f432082a2317f08a08c4293bb7fea529a28b5f'
     build-options:
       cflags-override: true
       cppflags-override: true
@@ -74,7 +75,7 @@ modules:
       cppflags: ''
       cxxflags: ''
       ldflags: ''
-      prefix: '/usr/lib/sdk/muteki/arm-none-bestaeabi'
+      prefix: '/usr/lib/sdk/muteki/_bootstrap/arm-none-bestaeabi'
       prepend-path: '/usr/lib/sdk/muteki/_bootstrap/bin'
     config-opts:
       - '--cross-file=../meson-cross/arm-none-bestaeabi.ini'
@@ -88,19 +89,7 @@ modules:
         url: 'https://github.com/Project-Muteki/newlib.git'
         commit: '9f8398717149ffebfe14c34676a9d9fa9f469426'
     build-options:
-      cflags-override: true
-      cppflags-override: true
-      cxxflags-override: true
-      ldflags-override: true
-      cflags: ''
-      cppflags: ''
-      cxxflags: ''
-      ldflags: ''
       prepend-path: '/usr/lib/sdk/muteki/_bootstrap/bin'
-      env:
-        CFLAGS_FOR_TARGET: '-I/usr/lib/sdk/muteki/arm-none-bestaeabi/include'
-        CPPFLAGS_FOR_TARGET: '-I/usr/lib/sdk/muteki/arm-none-bestaeabi/include'
-        LDFLAGS_FOR_TARGET: '-L/usr/lib/sdk/muteki/arm-none-bestaeabi/lib'
     config-opts:
       - '--prefix=/usr/lib/sdk/muteki'
       - '--build=x86_64-pc-linux-gnu' # TODO add arm64 support
@@ -164,6 +153,27 @@ modules:
       - '--with-cpu=arm7tdmi'
       - '--with-float=soft'
 
+  - name: 'target-muteki-shims'
+    buildsystem: 'meson'
+    sources:
+      - type: git
+        url: 'https://github.com/Project-Muteki/muteki-shims.git'
+        commit: '01f432082a2317f08a08c4293bb7fea529a28b5f'
+    build-options:
+      cflags-override: true
+      cppflags-override: true
+      cxxflags-override: true
+      ldflags-override: true
+      cflags: ''
+      cppflags: ''
+      cxxflags: ''
+      ldflags: ''
+      prefix: '/usr/lib/sdk/muteki/arm-none-bestaeabi'
+      prepend-path: '/usr/lib/sdk/muteki/bin'
+    config-opts:
+      - '--buildtype=release'
+      - '--cross-file=../meson-cross/arm-none-bestaeabi.ini'
+
   - name: 'target-mutekix'
     buildsystem: 'meson'
     sources:
@@ -186,6 +196,7 @@ modules:
       prefix: '/usr/lib/sdk/muteki/arm-none-bestaeabi'
       prepend-path: '/usr/lib/sdk/muteki/bin'
     config-opts:
+      - '--buildtype=release'
       - '--cross-file=../meson-cross/arm-none-bestaeabi.ini'
 
   - 'python3-besta-tools.json'

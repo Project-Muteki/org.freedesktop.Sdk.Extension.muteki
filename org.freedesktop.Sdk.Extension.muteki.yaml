@@ -179,7 +179,7 @@ modules:
     sources:
       - type: git
         url: 'https://github.com/Project-Muteki/mutekix.git'
-        commit: 'dba6d592c9d12ecc2e5387f95412ef4437542f37'
+        commit: 'aabfb703a83b109a4835b96999977a610794ae4e'
       - type: git
         url: 'https://github.com/Project-Muteki/meson-cross.git'
         commit: 'c3cdaa1a70ab0c3e75a7ee1a13d3578a46b032a8'

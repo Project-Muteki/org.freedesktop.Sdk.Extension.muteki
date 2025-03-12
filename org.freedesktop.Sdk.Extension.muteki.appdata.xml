@@ -13,6 +13,11 @@
   <url type="homepage">https://github.com/Project-Muteki</url>
   <project_license>GPL-2.0 AND GPL-2.0-with-GCC-exception AND MIT</project_license>
   <releases>
+    <release version="2025031201" date="2025-03-12">
+      <description>
+        <p>Update newlib to 4.4.0.</p>
+      </description>
+    </release>
     <release version="2025030601" date="2025-03-06">
       <description>
         <p>Update mutekix.</p>

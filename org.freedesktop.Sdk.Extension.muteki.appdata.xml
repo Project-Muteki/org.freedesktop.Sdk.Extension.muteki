@@ -13,6 +13,11 @@
   <url type="homepage">https://github.com/Project-Muteki</url>
   <project_license>GPL-2.0 AND GPL-2.0-with-GCC-exception AND MIT</project_license>
   <releases>
+    <release version="2025062701" date="2025-06-27">
+      <description>
+        <p>Update muteki-shims and besta-tools.</p>
+      </description>
+    </release>
     <release version="2025050901" date="2025-05-09">
       <description>
         <p>Update gcc to 15.1.0, binutils to 2.44, muteki-shims and mutekix.</p>

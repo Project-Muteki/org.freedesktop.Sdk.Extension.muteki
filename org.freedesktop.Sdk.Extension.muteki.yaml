@@ -64,7 +64,7 @@ modules:
     sources:
       - type: git
         url: 'https://github.com/Project-Muteki/muteki-shims.git'
-        commit: '90ac2080314dc8e4856409aaf5c47f7225504ad3'
+        commit: '8c2badd0b032aa49ec5b2723a539b1c65122bd47'
     build-options:
       cflags-override: true
       cppflags-override: true
@@ -87,7 +87,7 @@ modules:
     sources:
       - type: git
         url: 'https://github.com/Project-Muteki/muteki-shims.git'
-        commit: '90ac2080314dc8e4856409aaf5c47f7225504ad3'
+        commit: '8c2badd0b032aa49ec5b2723a539b1c65122bd47'
     build-options:
       cflags-override: true
       cppflags-override: true

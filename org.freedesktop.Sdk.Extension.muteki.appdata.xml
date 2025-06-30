@@ -13,6 +13,11 @@
   <url type="homepage">https://github.com/Project-Muteki</url>
   <project_license>GPL-2.0 AND GPL-2.0-with-GCC-exception AND MIT</project_license>
   <releases>
+    <release version="2025063001" date="2025-06-30">
+      <description>
+        <p>Update besta-tools to fix a memory corruption bug.</p>
+      </description>
+    </release>
     <release version="2025062701" date="2025-06-27">
       <description>
         <p>Update muteki-shims and besta-tools.</p>
@@ -26,31 +31,6 @@
     <release version="2025032101" date="2025-03-21">
       <description>
         <p>Update newlib to 4.4.0-muteki2.</p>
-      </description>
-    </release>
-    <release version="2025031201" date="2025-03-12">
-      <description>
-        <p>Update newlib to 4.4.0.</p>
-      </description>
-    </release>
-    <release version="2025030601" date="2025-03-06">
-      <description>
-        <p>Update mutekix.</p>
-      </description>
-    </release>
-    <release version="2025030201" date="2025-03-02">
-      <description>
-        <p>Turn on optimization for muteki-shims and mutekix, and build another copy of muteki-shims that is used exclusively for building newlib.</p>
-      </description>
-    </release>
-    <release version="2025022801" date="2025-02-28">
-      <description>
-        <p>Package besta-tools so IDEs can output final applet executables without the help from a more complete SDK installation outside Flatpak.</p>
-      </description>
-    </release>
-    <release version="2025022701" date="2025-02-27">
-      <description>
-        <p>Initial release.</p>
       </description>
     </release>
   </releases>

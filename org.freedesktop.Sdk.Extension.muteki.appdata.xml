@@ -13,6 +13,16 @@
   <url type="homepage">https://github.com/Project-Muteki</url>
   <project_license>GPL-2.0 AND GPL-2.0-with-GCC-exception AND MIT</project_license>
   <releases>
+    <release version="2025081001" date="2025-08-10">
+      <description>
+        <p>Rework exit logic in newlib, and disable newlib-register-fini option.</p>
+      </description>
+    </release>
+    <release version="2025080801" date="2025-08-08">
+      <description>
+        <p>Move EABI compatibility code out of libc into libmuteki-osdep.</p>
+      </description>
+    </release>
     <release version="2025063001" date="2025-06-30">
       <description>
         <p>Update besta-tools to fix a memory corruption bug.</p>
@@ -21,16 +31,6 @@
     <release version="2025062701" date="2025-06-27">
       <description>
         <p>Update muteki-shims and besta-tools.</p>
-      </description>
-    </release>
-    <release version="2025050901" date="2025-05-09">
-      <description>
-        <p>Update gcc to 15.1.0, binutils to 2.44, muteki-shims and mutekix.</p>
-      </description>
-    </release>
-    <release version="2025032101" date="2025-03-21">
-      <description>
-        <p>Update newlib to 4.4.0-muteki2.</p>
       </description>
     </release>
   </releases>

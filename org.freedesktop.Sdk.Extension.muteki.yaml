@@ -34,7 +34,7 @@ modules:
     sources:
       - type: 'git'
         url: 'https://github.com/Project-Muteki/gcc.git'
-        tag: 'gcc-15.1.0-muteki-eabi'
+        tag: 'releases/gcc-15.1.0-muteki-eabi-2'
       - type: 'archive'
         url: 'https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz'
         sha256: 'ab642492f5cf882b74aa0cb730cd410a81edcdbec895183ce930e706c1c759b8'
@@ -59,12 +59,12 @@ modules:
       - '--with-cpu=arm7tdmi'
       - '--with-float=soft'
 
-  - name: 'target-muteki-shims-bootstrap'
+  - name: 'target-muteki-bootstrap'
     buildsystem: 'meson'
     sources:
       - type: git
-        url: 'https://github.com/Project-Muteki/muteki-shims.git'
-        commit: '8c2badd0b032aa49ec5b2723a539b1c65122bd47'
+        url: 'https://github.com/Project-Muteki/muteki.git'
+        commit: 'd80130e58333653e32d6578c0795d471eaeb3642'
     build-options:
       cflags-override: true
       cppflags-override: true
@@ -82,12 +82,12 @@ modules:
   # libstdc++ now has implicit dependency (and later explicit after we inevitably patch it at some point) on this,
   # so currently we need to rebuild the entire toolchain whenever the shims were updated unfortunately.
   # There might be a way to exclude libstdc++ and rebuild that separately only when the shims || libc were updated though...
-  - name: 'target-muteki-shims'
+  - name: 'target-muteki'
     buildsystem: 'meson'
     sources:
       - type: git
-        url: 'https://github.com/Project-Muteki/muteki-shims.git'
-        commit: '8c2badd0b032aa49ec5b2723a539b1c65122bd47'
+        url: 'https://github.com/Project-Muteki/muteki.git'
+        commit: 'd80130e58333653e32d6578c0795d471eaeb3642'
     build-options:
       cflags-override: true
       cppflags-override: true
@@ -110,7 +110,7 @@ modules:
     sources:
       - type: 'git'
         url: 'https://github.com/Project-Muteki/newlib.git'
-        tag: 'newlib-4.4.0-muteki2'
+        tag: 'newlib-4.4.0-muteki4'
     build-options:
       prepend-path: '/usr/lib/sdk/muteki/_bootstrap/bin'
     config-opts:
@@ -122,9 +122,9 @@ modules:
       - '--disable-newlib-supplied-syscalls'
       - '--disable-nls'
       - '--disable-libgloss'
+      - '--disable-newlib-register-fini'
       - '--enable-newlib-mb'
       - '--enable-newlib-iconv'
-      - '--enable-newlib-register-fini'
       - '--enable-newlib-reent-thread-local'
     make-args:
       - 'all-target-newlib'
@@ -152,7 +152,7 @@ modules:
     sources:
       - type: 'git'
         url: 'https://github.com/Project-Muteki/gcc.git'
-        tag: 'gcc-15.1.0-muteki-eabi'
+        tag: 'releases/gcc-15.1.0-muteki-eabi-2'
       - type: 'archive'
         url: 'https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz'
         sha256: 'ab642492f5cf882b74aa0cb730cd410a81edcdbec895183ce930e706c1c759b8'

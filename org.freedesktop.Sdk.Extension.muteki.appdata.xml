@@ -13,6 +13,11 @@
   <url type="homepage">https://github.com/Project-Muteki</url>
   <project_license>GPL-2.0 AND GPL-2.0-with-GCC-exception AND MIT</project_license>
   <releases>
+    <release version="2025081701" date="2025-08-17">
+      <description>
+        <p>Update newlib to 4.5.0-muteki.</p>
+      </description>
+    </release>
     <release version="2025081001" date="2025-08-10">
       <description>
         <p>Rework exit logic in newlib, and disable newlib-register-fini option.</p>
@@ -26,11 +31,6 @@
     <release version="2025063001" date="2025-06-30">
       <description>
         <p>Update besta-tools to fix a memory corruption bug.</p>
-      </description>
-    </release>
-    <release version="2025062701" date="2025-06-27">
-      <description>
-        <p>Update muteki-shims and besta-tools.</p>
       </description>
     </release>
   </releases>

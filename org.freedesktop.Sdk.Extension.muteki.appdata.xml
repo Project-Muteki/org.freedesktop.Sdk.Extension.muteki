@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="runtime">
+<component type="addon">
   <id>org.freedesktop.Sdk.Extension.muteki</id>
+  <extends>org.freedesktop.Sdk</extends>
   <metadata_license>CC0-1.0</metadata_license>
   <name>Besta RTOS SDK Extension</name>
   <summary>Besta RTOS toolchain and support libraries</summary>
@@ -13,6 +14,11 @@
   <url type="homepage">https://github.com/Project-Muteki</url>
   <project_license>GPL-2.0 AND GPL-2.0-with-GCC-exception AND MIT</project_license>
   <releases>
+    <release version="2025082001" date="2025-08-20">
+      <description>
+        <p>Update GCC to 15.2.0-muteki and binutils to 2.45-muteki.</p>
+      </description>
+    </release>
     <release version="2025081701" date="2025-08-17">
       <description>
         <p>Update newlib to 4.5.0-muteki.</p>
@@ -26,11 +32,6 @@
     <release version="2025080801" date="2025-08-08">
       <description>
         <p>Move EABI compatibility code out of libc into libmuteki-osdep.</p>
-      </description>
-    </release>
-    <release version="2025063001" date="2025-06-30">
-      <description>
-        <p>Update besta-tools to fix a memory corruption bug.</p>
       </description>
     </release>
   </releases>
